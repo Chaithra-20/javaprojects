@@ -88,5 +88,29 @@ public class cusdao {
 		}
 		
 	}
+	public int checkBalance(int cid)throws Exception {
+		String query="select * from banking where cid="+cid;
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery(query);
+		rs.next();
+		int availableamount=rs.getInt(5);
+		return availableamount;
+	}
+	public int pinChange(int cid,String oldPwd,String newPwd)throws Exception{
+		String query="select * from banking where cid="+cid;
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery(query);
+		rs.next();
+		String pwd=rs.getString(3);
+		if(pwd.equals(oldPwd)) {
+			String query2="update banking set cpassword= '"+newPwd+"' where cid="+cid;
+			PreparedStatement pst=con.prepareStatement(query2);
+			int res=pst.executeUpdate();
+			return res;
+		}
+		else {
+			return -1;
+		}
+	}
 	
 }

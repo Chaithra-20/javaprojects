@@ -79,6 +79,25 @@ public class bankingmain {
 						System.out.println("Deposition done succesfully.....Available balance is :"+bal);
 					}
 				}
+				case 3-> {
+					System.out.println("Available Balance : "+dao.checkBalance(res));
+				}
+				case 4-> {
+					System.out.println("Enter Present Password ");
+					String oldPwd=ck.next();
+					System.out.println("Enter new Password");
+					String newPwd=ck.next();
+					int count=dao.pinChange(res,oldPwd,newPwd);
+					
+					if(count==-1)
+					{
+						System.out.println("Password Wrong");
+					}
+					else {
+						System.out.println("Password changed Susccessfully");
+					}
+				}
+				default->System.out.println("Logout Successful");
 				}
 			}
 		}
